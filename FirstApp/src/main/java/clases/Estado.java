@@ -1,4 +1,6 @@
 package clases;
 public interface Estado{
-    public int actualizar();
+    public void actualizar();
+
+    public void setTarea(Tarea tarea);
 }

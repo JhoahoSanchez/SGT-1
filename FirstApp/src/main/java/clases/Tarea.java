@@ -10,54 +10,34 @@ public class Tarea {
     private RecordatorioTarea recordatorioTarea;
     private String descripcion;
     private Estado estado;
+    private RestriccionTarea restriccionTarea = new RestriccionTarea();
 
-    public Tarea(String descripcion, Fecha fechaVencimiento, CategoriaEntity categoria, Estado estado){
-        if(descripcion.isEmpty()){
-            throw new IllegalArgumentException("No puede crear una tarea con descripcion nula");
-        }
-        this.descripcion = descripcion;
-
-        this.fechaCreacion = new Fecha();
-        if(fechaVencimiento == null){
-            throw new IllegalArgumentException("Debe seleccionar la fecha de vencimiento");
-        }
-        this.fechaVencimiento = fechaVencimiento;
-        if(categoria.getDescripcion().equals("")){
-            throw new IllegalArgumentException("Debe ingresar una categoria para la tarea");
-        }
-        //if(!existeCategoria(categoria)){
-          //  throw new IllegalArgumentException("Debe ingresar el nombre la descripcion de una de las categorias registradas");
-        //}
-        this.categoria =  categoria;
-        this.estado = estado;
-    }
-
-    public Tarea(String descripcion, Fecha fechaVencimiento, RecordatorioTarea recordatorioTarea, CategoriaEntity categoria, Estado estado){
-        if(descripcion.isEmpty()){
-            throw new IllegalArgumentException("No puede crear una tarea con descripcion nula");
-        }
-        this.descripcion = descripcion;
-        this.fechaCreacion = new Fecha();
-        if(fechaVencimiento == null){
-            throw new IllegalArgumentException("Debe seleccionar la fecha de vencimiento");
-        }
-        this.fechaVencimiento = fechaVencimiento;
+    public Tarea(String descripcion, Fecha fechaVencimiento, RecordatorioTarea recordatorioTarea, CategoriaEntity categoria){
+        this(descripcion,fechaVencimiento,categoria);
         this.recordatorioTarea = recordatorioTarea;
-        if(categoria.getDescripcion().equals("")){
-            throw new IllegalArgumentException("Debe ingresar una categoria para la tarea");
-        }
-
-        if(!existeCategoria(categoria)){
-            throw new IllegalArgumentException("Debe ingresar el nombre la descripcion de una de las categorias registradas");
-        }
-        this.categoria = categoria;
-        this.estado = estado;
     }
 
+    public Tarea(String descripcion, Fecha fechaVencimiento, CategoriaEntity categoria){
+        restriccionTarea.validarDescripcion(descripcion);
+        this.descripcion = descripcion;
+
+        this.fechaCreacion = new Fecha();
+
+        restriccionTarea.validarFecha(fechaVencimiento);
+        this.fechaVencimiento = fechaVencimiento;
+
+        //restriccionTarea.validarCategoria(categoria);
+        this.categoria =  categoria;
+        this.estado = new Pendiente();
+        this.estado.setTarea(this);
+    }
+
+    public void setEstado(Estado estado){
+        this.estado = estado;
+        //this.estado.setTarea(this);
+    }
     public void cambiarEstado() {
-        if(this.estado.actualizar() == 0){
-            this.estado = new Completado();
-        }else{ this.estado = new Pendiente();}
+        this.estado.actualizar();
     }
 
     public void modificarFechaVencimiento(String nuevaFechaVencimiento) {
@@ -116,10 +96,6 @@ public class Tarea {
 
     public Estado getEstado() {
         return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
     }
 
     @Override

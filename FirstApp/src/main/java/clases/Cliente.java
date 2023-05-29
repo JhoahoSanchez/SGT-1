@@ -22,31 +22,6 @@ public class Cliente {
         return cuenta.validar(correo, password);
     }
 
-    public void crearTarea(Tarea tarea) {
-        cuenta.getListaTareas().agregarTarea(tarea);
-    }
-
-    public void quitarTarea(Tarea tarea) {
-        cuenta.getListaTareas().quitarTarea(tarea);;
-    }
-
-    public void cambiarEstadoTarea(Tarea tarea) {
-        if(cuenta.getListaTareas().existeTarea(tarea)){
-            tarea.cambiarEstado();
-        }
-    }
-
-    public void crearCategoria(CategoriaEntity categoria) {
-        cuenta.getListaCategorias().agregarCategoria(categoria);
-    }
-
-    public void modificarFechaVencimientoTarea(Tarea tarea, String nuevaFechaVencimiento) {
-        if(cuenta.getListaTareas().existeTarea(tarea)){
-            tarea.modificarFechaVencimiento(nuevaFechaVencimiento);
-        }
-
-    }
-
     public void listarTarea() {
         List<Tarea> listaDeTareas = cuenta.getListaTareas().getListaTareas();
         for(int i=0; i < listaDeTareas.size();i++){
@@ -68,10 +43,10 @@ public class Cliente {
     }
 
     public void buscarTareaPorFecha(String fecha) {
-        Tarea[] tarea = cuenta.getListaTareas().buscarTareaPorFecha(fecha);
-        for(int i=0;i<tarea.length;i++){
-            if(tarea[i]!=null){
-                System.out.println(tarea[i]);
+        List<Tarea> tarea = cuenta.getListaTareas().buscarTareaPorFecha(fecha);
+        for(int i=0;i<tarea.size();i++){
+            if(tarea.get(i) != null){
+                System.out.println(tarea.get(i).toString());
             }
         }
     }

@@ -22,19 +22,18 @@ public class ListaDeCategoria {
     }
 
     public void quitarCategoria(CategoriaEntity categoria) {
-        for (int i = 0; i < categorias.size(); i++) {
-            if (categorias.get(i).equals(categoria)) {
-                categorias.remove(i);
-                break;
-            }
-        }
+        categorias.remove(categoria);
     }
 
     public List<CategoriaEntity> getListaCategorias() {
         return this.categorias;
     }
 
-    public CategoriaEntity buscarCategoria(int id) {
+    public boolean buscarCategoria(CategoriaEntity categoria) {
+        return categorias.contains(categoria);
+    }
+
+    public CategoriaEntity getCategoria(int id) {
         return categorias.get(id);
     }
 
