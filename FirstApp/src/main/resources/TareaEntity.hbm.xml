@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.example.firstapp.TareaEntity" table="tarea" schema="gestiontareas">
+        <id name="idTarea">
+            <column name="id_tarea" sql-type="int"/>
+        </id>
+        <property name="fechaCreacion">
+            <column name="fechaCreacion" sql-type="date" not-null="true"/>
+        </property>
+        <property name="fechaVencimiento">
+            <column name="fechaVencimiento" sql-type="date" not-null="true"/>
+        </property>
+        <property name="categoria">
+            <column name="categoria" sql-type="int" not-null="true"/>
+        </property>
+        <property name="estado">
+            <column name="estado" sql-type="int" not-null="true"/>
+        </property>
+        <property name="descripcion">
+            <column name="descripcion" sql-type="varchar(30)" length="30" not-null="true"/>
+        </property>
+        <property name="direccionCorreo">
+            <column name="direccionCorreo" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+        <property name="notificar">
+            <column name="notificar" sql-type="tinyint(1)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
