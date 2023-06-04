@@ -59,7 +59,7 @@ public class SvTareaCR extends HttpServlet {
         tarea.setDireccionCorreo("jhoaho2001@gmail.com");
         tarea.setNotificar((byte) 0);
         System.out.println(tareaDAO.crear(tarea));
-        listaDeTarea.agregarTarea(new Tarea(tarea.getDescripcion(), new Fecha(tarea.getFechaVencimiento()), listaDeCategoria.buscarCategoria(b), new Pendiente()));
+        listaDeTarea.agregarTarea(new Tarea(tarea.getDescripcion(), new Fecha(tarea.getFechaVencimiento()), listaDeCategoria.getCategoria(b)));
 
         response.sendRedirect("tareas.jsp");
     }

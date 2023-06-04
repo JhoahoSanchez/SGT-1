@@ -15,7 +15,7 @@
 <body>
     <header class="header">
         <div class="logo">
-            <a href="index.jsp"><img src="images/icon.png" alt="Logo"></a>
+            <a href="paginaInicio.jsp"><img src="images/icon.png" alt="Logo"></a>
         </div>
         <nav>
             <ul class="nav-links">

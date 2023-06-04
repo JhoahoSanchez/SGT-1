@@ -23,7 +23,7 @@ public class Tarea {
 
         this.fechaCreacion = new Fecha();
 
-        restriccionTarea.validarFecha(fechaVencimiento);
+        //restriccionTarea.validarFecha(fechaVencimiento);
         this.fechaVencimiento = fechaVencimiento;
 
         //restriccionTarea.validarCategoria(categoria);

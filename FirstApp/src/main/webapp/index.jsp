@@ -5,27 +5,31 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SGT</title>
-    <link rel="stylesheet" href="styles/styleIndex.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/login.css">
+
 </head>
 
 <body>
-    <header class="header">
-        <div class="logo">
-            <a href="index.jsp"><img src="images/icon.png" alt="Logo"></a>
+    <form action="paginaInicio.jsp" method="POST">
+        <div>
+            <img src="/images/user.png" alt="ImagenUser">
         </div>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#">Perfil</a></li>
-                <li><a href="SvTarea" method="GET">Tareas</a></li>
-                <li><a href="SvCategoria" method="GET">Categorías</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div id="contenido">
-        <img src="images/penguin.png" alt="Penguin" class="centered-image">
-    </div>
+
+        <h1>Login</h1>
+
+        <input type="email" id="email" name="email" placeholder="Ingrese su correo electrónico" required>
+
+        <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" required>
+        <div><a href="recuperarContra.jsp">Olvidé la contraseña</a><br><br></div>
+
+        <div class="cols">
+            <button type="submit">Iniciar Sesión</button>
+            <button type="button" onclick="window.location.href='register.jsp'">Registrarme</button>
+        </div>
+
+    </form>
 </body>
 
 </html>

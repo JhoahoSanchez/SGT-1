@@ -1,7 +1,5 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.firstapp.CategoriaEntity" %>
-<%@ page import="com.example.firstapp.TareaEntity" %>
-<%@ page import="clases.ListaDeTarea" %>
 <%@ page import="clases.Tarea" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -19,7 +17,7 @@
 <body>
 <header class="header">
     <div class="logo">
-        <a href="index.jsp"><img src="images/icon.png" alt="Logo"></a>
+        <a href="paginaInicio.jsp"><img src="images/icon.png" alt="Logo"></a>
     </div>
     <nav>
         <ul class="nav-links">
