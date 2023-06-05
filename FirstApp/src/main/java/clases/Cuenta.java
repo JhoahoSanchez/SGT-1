@@ -98,7 +98,7 @@ public class Cuenta {
         return c;
     }
 
-    public boolean validarFormatoCorreo(String correo) {
+    public boolean validarFormatoCorreo(String correos) {
         String expresionRegular = "^[A-Za-z0-9._]+@[A-Za-z0-9]+\\.[A-Za-z]{2,3}$";
         Pattern pattern = Pattern.compile(expresionRegular);
         Matcher matcher = pattern.matcher(correo);

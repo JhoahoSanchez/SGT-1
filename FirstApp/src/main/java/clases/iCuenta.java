@@ -1,4 +1,4 @@
 package clases;
 public interface iCuenta {
-    public boolean validarFormatoPassword(String password);
+    public boolean validarFormatoPassword(String password1);
 }
