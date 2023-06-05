@@ -26,7 +26,7 @@ public class CuentaTest {
 
     @Test
     public void given_apassword_when_validatepasswordformat_then_ok(){
-        //Test Unitario : Mock
+        //Test Unitario: Mock
         iCuenta icuenta = Mockito.mock(iCuenta.class);
         Mockito.when(icuenta.validarFormatoPassword("56978@bc")).thenReturn(true);
 
@@ -35,7 +35,7 @@ public class CuentaTest {
 
     @Test
     public void given_amailaccount_when_validatemailformat_then_ok(){
-        //Test Unitario : Coberura de prueba
+        //Test Unitario: Coberura de prueba
         String correo = "andres.327@hotmail.com";
         Cuenta cuenta = new Cuenta();
         boolean resultado = cuenta.validarFormatoCorreo(correo);
@@ -45,7 +45,7 @@ public class CuentaTest {
 
     @Test
     public void given_anaccount_when_validate_then_ok(){
-        //Test Unitario : Caso de exito
+        //Test Unitario: Caso de exito
         //Arrange: datos necesarios para la prueba
         String correo = "andres.gmail.com";
         String password= "12345";
