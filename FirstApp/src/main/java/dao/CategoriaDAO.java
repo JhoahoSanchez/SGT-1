@@ -1,16 +1,11 @@
 package dao;
 
 import com.example.firstapp.CategoriaEntity;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
 public class CategoriaDAO {
 
-    private SessionFactory sessionFactory;
-    private Session session;
     public int size;
 
     public CategoriaDAO() {
@@ -18,11 +13,11 @@ public class CategoriaDAO {
 
     public String crear(CategoriaEntity categoria) {
         try {
-            this.open();
-            this.session.beginTransaction();
-            this.session.save(categoria);
-            this.session.getTransaction().commit();
-            this.close();
+            Conexion.open();
+            Conexion.session.beginTransaction();
+            Conexion.session.save(categoria);
+            Conexion.session.getTransaction().commit();
+            Conexion.close();
             return "Categoria creada";
         } catch (Exception e) {
             return "Error: Categoria no creada";
@@ -31,13 +26,13 @@ public class CategoriaDAO {
 
     public String actualizar(int id, String descripcion) {
         try {
-            this.open();
-            this.session.beginTransaction();
-            CategoriaEntity categoria = this.session.get(CategoriaEntity.class, id);
+            Conexion.open();
+            Conexion.session.beginTransaction();
+            CategoriaEntity categoria = Conexion.session.get(CategoriaEntity.class, id);
             categoria.setDescripcion(descripcion);
-            this.session.update(categoria);
-            this.session.getTransaction().commit();
-            this.close();
+            Conexion.session.update(categoria);
+            Conexion.session.getTransaction().commit();
+            Conexion.close();
             return "Categoria actualizada";
         } catch (Exception e) {
             return "Error: Categoria no actualizada";
@@ -46,11 +41,11 @@ public class CategoriaDAO {
 
     public CategoriaEntity leer(int id) {
         try {
-            this.open();
-            this.session.beginTransaction();
-            CategoriaEntity categoria = this.session.get(CategoriaEntity.class, id);
-            this.session.getTransaction().commit();
-            this.close();
+            Conexion.open();
+            Conexion.session.beginTransaction();
+            CategoriaEntity categoria = Conexion.session.get(CategoriaEntity.class, id);
+            Conexion.session.getTransaction().commit();
+            Conexion.close();
 
             System.out.println("Categoria leida");
             return categoria;
@@ -60,14 +55,14 @@ public class CategoriaDAO {
         return null;
     }
 
-    public List<CategoriaEntity> leerTodo(){
+    public List<CategoriaEntity> leerTodo() {
         List<CategoriaEntity> listaCategorias = null;
         try {
-            this.open();
-            this.session.beginTransaction();
-            listaCategorias = this.session.createQuery("from CategoriaEntity ").getResultList();
-            this.session.getTransaction().commit();
-            this.close();
+            Conexion.open();
+            Conexion.session.beginTransaction();
+            listaCategorias = Conexion.session.createQuery("from CategoriaEntity ").getResultList();
+            Conexion.session.getTransaction().commit();
+            Conexion.close();
 
             System.out.println("Categorias leidas");
             this.size = listaCategorias.size();
@@ -80,27 +75,17 @@ public class CategoriaDAO {
 
     public String borrar(int id) {
         try {
-            this.open();
-            this.session.beginTransaction();
-            CategoriaEntity categoria = session.get(CategoriaEntity.class, id);
-            this.session.delete(categoria);
-            this.session.getTransaction().commit();
-            this.close();
+            Conexion.open();
+            Conexion.session.beginTransaction();
+            CategoriaEntity categoria = Conexion.session.get(CategoriaEntity.class, id);
+            Conexion.session.delete(categoria);
+            Conexion.session.getTransaction().commit();
+            Conexion.close();
 
             return "Categoria eliminada";
 
         } catch (Exception e) {
             return "Error: Categoria no eliminada";
         }
-    }
-
-    public void close() {
-        this.sessionFactory.close();
-        this.session.close();
-    }
-
-    public void open() {
-        this.sessionFactory = new Configuration().configure().buildSessionFactory();
-        this.session = sessionFactory.openSession();
     }
 }

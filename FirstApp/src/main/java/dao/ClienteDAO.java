@@ -1,25 +1,19 @@
 package dao;
 
 import com.example.firstapp.ClienteEntity;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 public class ClienteDAO {
-
-    private SessionFactory sessionFactory;
-    private Session session;
 
     public ClienteDAO() {
     }
 
     public String crear(ClienteEntity cliente) {
         try {
-            this.open();
-            this.session.beginTransaction();
-            this.session.save(cliente);
-            this.session.getTransaction().commit();
-            this.close();
+            Conexion.open();
+            Conexion.session.beginTransaction();
+            Conexion.session.save(cliente);
+            Conexion.session.getTransaction().commit();
+            Conexion.close();
             return "Cliente creado";
         } catch (Exception e) {
             return "Error: Cliente no creado";
@@ -28,13 +22,13 @@ public class ClienteDAO {
 
     public String actualizar(int id, String correo) {
         try {
-            this.open();
-            this.session.beginTransaction();
-            ClienteEntity cliente = this.session.get(ClienteEntity.class, id);
+            Conexion.open();
+            Conexion.session.beginTransaction();
+            ClienteEntity cliente = Conexion.session.get(ClienteEntity.class, id);
             cliente.setDireccionCorreo(correo);
-            this.session.update(cliente);
-            this.session.getTransaction().commit();
-            this.close();
+            Conexion.session.update(cliente);
+            Conexion.session.getTransaction().commit();
+            Conexion.close();
 
             return "Correo actualizado";
 
@@ -45,11 +39,11 @@ public class ClienteDAO {
 
     public ClienteEntity leer(int id) {
         try {
-            this.open();
-            this.session.beginTransaction();
-            ClienteEntity cliente = this.session.get(ClienteEntity.class, id);
-            this.session.getTransaction().commit();
-            this.close();
+            Conexion.open();
+            Conexion.session.beginTransaction();
+            ClienteEntity cliente = Conexion.session.get(ClienteEntity.class, id);
+            Conexion.session.getTransaction().commit();
+            Conexion.close();
             System.out.println("Cliente leida");
             return cliente;
         } catch (Exception e) {
@@ -60,25 +54,15 @@ public class ClienteDAO {
 
     public String borrar(int id) {
         try {
-            this.open();
-            this.session.beginTransaction();
-            ClienteEntity cliente = this.session.get(ClienteEntity.class, id);
-            this.session.delete(cliente);
-            this.session.getTransaction().commit();
-            this.close();
+            Conexion.open();
+            Conexion.session.beginTransaction();
+            ClienteEntity cliente = Conexion.session.get(ClienteEntity.class, id);
+            Conexion.session.delete(cliente);
+            Conexion.session.getTransaction().commit();
+            Conexion.close();
             return "Cliente eliminado";
         } catch (Exception e) {
             return "Error: Cliente no eliminado";
         }
-    }
-
-    public void close() {
-        this.sessionFactory.close();
-        this.session.close();
-    }
-
-    public void open() {
-        this.sessionFactory = new Configuration().configure().buildSessionFactory();
-        this.session = sessionFactory.openSession();
     }
 }

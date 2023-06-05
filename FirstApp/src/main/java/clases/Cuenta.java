@@ -58,4 +58,43 @@ public class Cuenta {
             tarea.modificarFechaVencimiento(nuevaFechaVencimiento);
         }
     }
+
+    public String encriptarContra(String password) {
+        StringBuilder encryptedPassword = new StringBuilder();
+
+        for (int i = 0; i < password.length(); i++) {
+            char currentChar = password.charAt(i);
+            char encryptedChar = encryptCharacter(currentChar);
+            encryptedPassword.append(encryptedChar);
+        }
+        return encryptedPassword.toString();
+    }
+
+    private char encryptCharacter(char c) {
+        if (Character.isLetter(c)) {
+            char base = Character.isUpperCase(c) ? 'A' : 'a';
+            return (char) ((c - base + 3) % 26 + base);
+        }
+        return c;
+    }
+
+    public String desencriptarContra(String encryptedPassword) {
+        StringBuilder decryptedPassword = new StringBuilder();
+
+        for (int i = 0; i < encryptedPassword.length(); i++) {
+            char currentChar = encryptedPassword.charAt(i);
+            char decryptedChar = decryptCharacter(currentChar);
+            decryptedPassword.append(decryptedChar);
+        }
+
+        return decryptedPassword.toString();
+    }
+
+    private char decryptCharacter(char c) {
+        if (Character.isLetter(c)) {
+            char base = Character.isUpperCase(c) ? 'A' : 'a';
+            return (char) ((c - base - 3 + 26) % 26 + base);
+        }
+        return c;
+    }
 }
